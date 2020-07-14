@@ -4,12 +4,19 @@ import Cita from './components/Cita'
 
 
 function App() {
+
+  //Citas en Local Storage
+  let citasIniciales = JSON.parse(localStorage.getItem('citas'));
+  if(!citasIniciales)
+  {
+    citasIniciales = [];
+  }
   //Arreglo de Citas
-  const [citas, guardarCitas] = useState([]);
+  const [citas, guardarCitas] = useState(citasIniciales);
   //UseEffect para realizar operaciones cuando el State cambia
   useEffect(()=>{
-    console.log('Algo pasó con las citas')
-  },[citas])
+    localStorage.setItem('citas',JSON.stringify(citas));
+  },[citas, citasIniciales]);
   //Función Tomar Citas Actuales y Agregue nueva
   const crearCita = cita =>{
     //Función para almacenar citas
