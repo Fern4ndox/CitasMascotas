@@ -1,4 +1,4 @@
-import React,{Fragment, useState} from 'react';
+import React,{Fragment, useState, useEffect} from 'react';
 import Formulario from './components/Formulario'
 import Cita from './components/Cita'
 
@@ -6,6 +6,10 @@ import Cita from './components/Cita'
 function App() {
   //Arreglo de Citas
   const [citas, guardarCitas] = useState([]);
+  //UseEffect para realizar operaciones cuando el State cambia
+  useEffect(()=>{
+    console.log('Algo pasó con las citas')
+  },[citas])
   //Función Tomar Citas Actuales y Agregue nueva
   const crearCita = cita =>{
     //Función para almacenar citas
@@ -13,6 +17,8 @@ function App() {
       //Copía del State
       ...citas,cita]);
   }
+  //Mensaje Condicional
+  const titulo  = citas.length === 0 ? 'No hay Citas' : 'Administra tus Citas';
   //Funcion Eliminar por ID
   const eliminarCita =id =>{
     const nuevasCitas = citas.filter(cita => cita.id !== id);
@@ -29,7 +35,7 @@ function App() {
           />
           </div> 
           <div className="one-half column">
-          <h2>Administrar citas</h2>
+          <h2>{titulo}</h2>
           {citas.map(cita =>(
             <Cita
             key={cita.id}
