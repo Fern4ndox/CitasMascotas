@@ -13,6 +13,11 @@ function App() {
       //Copía del State
       ...citas,cita]);
   }
+  //Funcion Eliminar por ID
+  const eliminarCita =id =>{
+    const nuevasCitas = citas.filter(cita => cita.id !== id);
+    guardarCitas(nuevasCitas);
+  }
   return (
     <Fragment>
       <h1>Administrador de Pacientes</h1>
@@ -29,6 +34,7 @@ function App() {
             <Cita
             key={cita.id}
             cita={cita}
+            eliminarCita={eliminarCita}
             />
           ))}
           </div>
